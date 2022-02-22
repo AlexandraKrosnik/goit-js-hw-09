@@ -26,7 +26,8 @@ img {
   font-size: 18px;
   margin-right: 20px;
 }
-button[data-start] {
+button[data-start],
+button[data-stop] {
   padding: 5px 20px;
   background-color: inherit;
   border: none;
