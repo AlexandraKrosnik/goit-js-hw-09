@@ -8,7 +8,8 @@ const ref = {
 }
 let dateSelected = null;
 ref.buttonStart.disabled = true;
-const options = {
+let options = {
+    
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
@@ -18,7 +19,7 @@ const options = {
         if (selectedDates[0] - Date.now() <= 0 ) {
             Notiflix.Notify.warning("Please choose a date in the future")            
         }
-        else {
+        else {           
             ref.buttonStart.disabled = false;  
             dateSelected = selectedDates[0];
             
@@ -31,10 +32,11 @@ const timer = {
     indexInterval: null,        
     difference: null,
     start() {
-        
+        ref.inputDate.nextElementSibling.disabled = true;
+
         this.indexInterval = setInterval(() => {
-            let currentDate = Date.now();
-            this.difference = dateSelected - currentDate;            
+            
+            this.difference = dateSelected - Date.now();            
             this.stop();
             const { days, hours, minutes, seconds } = this.convertMs(this.difference);
             updateClock({ days, hours, minutes, seconds })                    
@@ -42,7 +44,9 @@ const timer = {
     },
     stop() {
         if (this.difference < 1000) {
-            clearInterval(this.indexInterval)
+            clearInterval(this.indexInterval);
+            ref.inputDate.nextElementSibling.disabled = false;
+            ref.buttonStart.disabled = false;
         }
     },
     convertMs(ms) {
@@ -68,7 +72,7 @@ const timer = {
 
 
 flatpickr(ref.inputDate, options);
-ref.buttonStart.addEventListener("click", () => { timer.start() })
+ref.buttonStart.addEventListener("click", (e) => { e.currentTarget.disabled = true; timer.start() })
 
 
 function pad(value) {

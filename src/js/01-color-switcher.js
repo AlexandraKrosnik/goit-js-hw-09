@@ -6,9 +6,10 @@ let disabled = false
 const color = {
     indexInterval: null,
     start() {
-        this.indexInterval = setInterval(() => {            
-            c = this.getRandomHexColor()
-            document.body.style.backgroundColor = c;
+        this.indexInterval = setInterval(() => {       
+           
+            document.body.style.backgroundColor = this.getRandomHexColor();
+
         }, 1000);
     },
     getRandomHexColor() {
@@ -20,12 +21,14 @@ const color = {
 };
 
 
-ref.buttonStart.addEventListener("click", () => {
-    ref.buttonStart.disabled =!disabled;
+ref.buttonStart.addEventListener("click", (e) => {
+    e.currentTarget.disabled = !disabled;
+    
     color.start()
 })
 ref.buttonStop.addEventListener("click", () => {
     ref.buttonStart.disabled = disabled;
+    
     color.stop()
 })
 

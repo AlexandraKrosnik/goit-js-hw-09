@@ -29,12 +29,15 @@ img {
 button[data-start],
 button[data-stop] {
   padding: 5px 20px;
-  background-color: inherit;
+  background-color: whitesmoke;
   border: none;
   border-radius: 2px;
   box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.2);
   color: rgb(0, 132, 255);
   font-size: 18px;
+}
+button[data-start][disabled] {
+  background-color: rgb(197, 195, 195);
 }
 .timer {
   display: flex;
